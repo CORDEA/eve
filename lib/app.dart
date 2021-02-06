@@ -7,7 +7,11 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'eve',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.yellow[600],
+        accentColor: Colors.brown[400],
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: Colors.brown[400],
+        ),
       ),
       home: Base(),
     );
