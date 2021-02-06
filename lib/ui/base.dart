@@ -24,12 +24,12 @@ class _Base extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var index = context.select<BaseBloc, int>((value) => value.index);
+    var bloc = context.watch<BaseBloc>();
     return Scaffold(
-      appBar: AppBar(
+      appBar: bloc.shouldShowAppBar ? AppBar(
         title: const Text('eve'),
-      ),
-      body: _contents[index],
+      ) : null,
+      body: _contents[bloc.index],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -45,7 +45,7 @@ class _Base extends StatelessWidget {
             label: 'Transfer',
           ),
         ],
-        currentIndex: index,
+        currentIndex: bloc.index,
         onTap: context.read<BaseBloc>().onBottomBarTapped,
       ),
     );
