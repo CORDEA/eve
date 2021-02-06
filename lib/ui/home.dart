@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -5,6 +7,10 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        CustomPaint(
+          painter: _HomeBackground(Theme.of(context).primaryColor),
+          size: Size.infinite,
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,4 +63,29 @@ class Home extends StatelessWidget {
       ],
     );
   }
+}
+
+class _HomeBackground extends CustomPainter {
+  Paint _paint;
+
+  _HomeBackground(Color color) {
+    _paint = Paint()..color = color;
+  }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawArc(
+      Rect.fromCircle(
+        center: Offset.zero,
+        radius: size.width,
+      ),
+      0,
+      pi / 2,
+      true,
+      _paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
