@@ -1,4 +1,6 @@
 class Account {
+  static const EMPTY = Account('', '', '', '');
+
   final String number;
   final String ownerName;
   final String branchCode;
