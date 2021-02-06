@@ -1,8 +1,20 @@
 import 'dart:math';
 
+import 'package:eve/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => HomeBloc(context.read()),
+      child: _Home(),
+    );
+  }
+}
+
+class _Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
