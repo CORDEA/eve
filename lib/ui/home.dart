@@ -14,7 +14,18 @@ class Home extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 32),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: IconButton(
+                  icon: const Icon(Icons.settings),
+                  tooltip: 'Account',
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 44),
               child: Text(
