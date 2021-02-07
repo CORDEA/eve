@@ -157,3 +157,13 @@ class _HomeAccountContent extends StatelessWidget {
     );
   }
 }
+
+class _HomeNotificationItem extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(''),
+      subtitle: Text(''),
+    );
+  }
+}
