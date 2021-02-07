@@ -55,7 +55,7 @@ class _HomeContent extends State<_Home> {
               padding: EdgeInsets.symmetric(horizontal: 44),
               child: _HomeBalanceLabel(),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
             const SizedBox(
               width: double.infinity,
               child: Padding(
@@ -115,7 +115,9 @@ class _HomeBalanceLabel extends StatelessWidget {
     );
     return Text(
       balance,
-      style: Theme.of(context).textTheme.headline4,
+      style: Theme.of(context).textTheme.headline4.copyWith(
+        color: Theme.of(context).textTheme.subtitle1.color,
+      ),
     );
   }
 }
