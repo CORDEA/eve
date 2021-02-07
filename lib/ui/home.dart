@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:eve/bloc/home_bloc.dart';
+import 'package:eve/models/notification.dart' as notification;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +9,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => HomeBloc(context.read()),
+      create: (context) => HomeBloc(context.read(), context.read()),
       child: _Home(),
     );
   }
@@ -25,7 +26,7 @@ class _HomeContent extends State<_Home> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeBloc>().fetchAccount();
+    context.read<HomeBloc>().fetch();
   }
 
   @override
@@ -73,6 +74,21 @@ class _HomeContent extends State<_Home> {
                 ),
               ),
             ),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                  ),
+                  child: _HomeNotifications(),
+                ),
+              ),
+            ),
           ],
         ),
       ],
@@ -116,8 +132,8 @@ class _HomeBalanceLabel extends StatelessWidget {
     return Text(
       balance,
       style: Theme.of(context).textTheme.headline4.copyWith(
-        color: Theme.of(context).textTheme.subtitle1.color,
-      ),
+            color: Theme.of(context).textTheme.subtitle1.color,
+          ),
     );
   }
 }
@@ -158,12 +174,36 @@ class _HomeAccountContent extends StatelessWidget {
   }
 }
 
-class _HomeNotificationItem extends StatelessWidget {
+class _HomeNotifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var count = context.select<HomeBloc, int>(
+      (value) => value.notifications.length,
+    );
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: count,
+      itemBuilder: (_, index) => _HomeNotificationItem(index: index),
+    );
+  }
+}
+
+class _HomeNotificationItem extends StatelessWidget {
+  final int _index;
+
+  const _HomeNotificationItem({Key key, @required index})
+      : _index = index,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var item = context.select<HomeBloc, notification.Notification>(
+      (value) => value.notifications[_index],
+    );
     return ListTile(
-      title: Text(''),
-      subtitle: Text(''),
+      title: Text(item.title),
+      subtitle: Text(item.body),
     );
   }
 }
