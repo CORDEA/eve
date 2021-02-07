@@ -14,7 +14,20 @@ class Home extends StatelessWidget {
   }
 }
 
-class _Home extends StatelessWidget {
+class _Home extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _HomeContent();
+  }
+}
+
+class _HomeContent extends State<_Home> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().fetchAccount();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -38,45 +51,24 @@ class _Home extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 44),
-              child: Text(
-                '',
-                style: Theme.of(context).textTheme.headline4,
-              ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 44),
+              child: _HomeBalanceLabel(),
             ),
             const SizedBox(height: 16),
-            SizedBox(
+            const SizedBox(
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Card(
-                  shape: const RoundedRectangleBorder(
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(8),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '',
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          '',
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '',
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      ],
-                    ),
+                    padding: EdgeInsets.all(16),
+                    child: _HomeAccountContent(),
                   ),
                 ),
               ),
@@ -111,4 +103,55 @@ class _HomeBackground extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class _HomeBalanceLabel extends StatelessWidget {
+  const _HomeBalanceLabel({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var balance = context.select<HomeBloc, String>(
+      (value) => value.balance,
+    );
+    return Text(
+      balance,
+      style: Theme.of(context).textTheme.headline4,
+    );
+  }
+}
+
+class _HomeAccountContent extends StatelessWidget {
+  const _HomeAccountContent({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Selector<HomeBloc, String>(
+          selector: (_, bloc) => bloc.branch,
+          builder: (_, text, __) => Text(
+            text,
+            style: Theme.of(context).textTheme.caption,
+          ),
+        ),
+        SizedBox(height: 2),
+        Selector<HomeBloc, String>(
+          selector: (_, bloc) => bloc.accountNumber,
+          builder: (_, text, __) => Text(
+            text,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
+        ),
+        SizedBox(height: 4),
+        Selector<HomeBloc, String>(
+          selector: (_, bloc) => bloc.ownerName,
+          builder: (_, text, __) => Text(
+            text,
+            style: Theme.of(context).textTheme.caption,
+          ),
+        ),
+      ],
+    );
+  }
 }
