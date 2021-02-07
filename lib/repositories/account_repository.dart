@@ -9,6 +9,7 @@ class AccountRepository {
         'John Doe',
         '001',
         'Head Office',
+        120000000,
       ),
     );
   }
