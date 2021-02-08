@@ -88,6 +88,7 @@ class _HomeContent extends State<_Home> {
                 ),
               ),
             ),
+            const SizedBox(height: 32),
           ],
         ),
       ],
@@ -182,6 +183,7 @@ class _HomeNotifications extends StatelessWidget {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(vertical: 8),
       itemCount: count,
       itemBuilder: (_, index) => _HomeNotificationItem(index: index),
     );
@@ -201,8 +203,16 @@ class _HomeNotificationItem extends StatelessWidget {
       (value) => value.notifications[_index],
     );
     return ListTile(
-      title: Text(item.title),
-      subtitle: Text(item.body),
+      title: Text(
+        item.title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Text(
+        item.body,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }
