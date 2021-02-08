@@ -62,7 +62,7 @@ class _DetailsItem extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  item.title,
+                  item.formattedAmount,
                   style: Theme.of(context).textTheme.subtitle1,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -70,14 +70,14 @@ class _DetailsItem extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                '',
+                item.formattedCreatedAt,
                 style: Theme.of(context).textTheme.caption,
               ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
-            '',
+            item.title,
             style: Theme.of(context).textTheme.caption,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
