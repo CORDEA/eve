@@ -1,11 +1,13 @@
+import 'package:eve/models/balance.dart';
+
 class Account {
-  static const EMPTY = Account('', '', '', '', -1);
+  static const EMPTY = Account('', '', '', '', Balance.EMPTY);
 
   final String number;
   final String ownerName;
   final String branchCode;
   final String branchName;
-  final double balance;
+  final Balance balance;
 
   const Account(
     this.number,
@@ -15,5 +17,5 @@ class Account {
     this.balance,
   );
 
-  bool get isBalanceAvailable => balance >= 0;
+  bool get isBalanceAvailable => balance.balance >= 0;
 }

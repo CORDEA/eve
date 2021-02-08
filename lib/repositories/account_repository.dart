@@ -1,4 +1,5 @@
 import 'package:eve/models/account.dart';
+import 'package:eve/models/balance.dart';
 
 class AccountRepository {
   Future<Account> find() {
@@ -9,7 +10,10 @@ class AccountRepository {
         'John Doe',
         '001',
         'Head Office',
-        120000000,
+        Balance(
+          120000000,
+          -320000,
+        ),
       ),
     );
   }

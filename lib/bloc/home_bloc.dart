@@ -17,7 +17,13 @@ class HomeBloc extends ChangeNotifier {
   HomeBloc(this._accountRepository, this._notificationRepository);
 
   String get balance => _account.isBalanceAvailable
-      ? '¥' + _formatter.format(_account.balance)
+      ? '¥' + _formatter.format(_account.balance.balance)
+      : '-';
+
+  bool get isPlusDifference => _account.balance.difference >= 0;
+
+  String get difference => _account.isBalanceAvailable
+      ? _formatter.format(_account.balance.difference)
       : '-';
 
   String get branch => _account.branchCode + ' ' + _account.branchName;
