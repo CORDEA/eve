@@ -1,4 +1,5 @@
 import 'package:eve/repositories/account_repository.dart';
+import 'package:eve/repositories/detail_repository.dart';
 import 'package:eve/repositories/notification_repository.dart';
 import 'package:eve/ui/base.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class App extends StatelessWidget {
       providers: [
         Provider(create: (_) => AccountRepository()),
         Provider(create: (_) => NotificationRepository()),
+        Provider(create: (_) => DetailRepository()),
       ],
       child: MaterialApp(
         title: 'eve',
