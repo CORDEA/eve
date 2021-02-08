@@ -55,6 +55,11 @@ class _HomeContent extends State<_Home> {
               padding: EdgeInsets.symmetric(horizontal: 44),
               child: _HomeBalanceLabel(),
             ),
+            const SizedBox(height: 8),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 48),
+              child: _HomeBalanceDifferenceLabel(),
+            ),
             const SizedBox(height: 32),
             const SizedBox(
               width: double.infinity,
@@ -134,6 +139,33 @@ class _HomeBalanceLabel extends StatelessWidget {
       style: Theme.of(context).textTheme.headline4.copyWith(
             color: Theme.of(context).textTheme.subtitle1.color,
           ),
+    );
+  }
+}
+
+class _HomeBalanceDifferenceLabel extends StatelessWidget {
+  const _HomeBalanceDifferenceLabel({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Selector<HomeBloc, bool>(
+          selector: (_, bloc) => bloc.isPlusDifference,
+          builder: (_, isPlus, __) => Icon(
+            isPlus ? Icons.trending_up : Icons.trending_down,
+            color: isPlus ? Colors.green : Colors.red,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Selector<HomeBloc, String>(
+          selector: (_, bloc) => bloc.difference,
+          builder: (_, diff, __) => Text(
+            diff,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
+        ),
+      ],
     );
   }
 }
