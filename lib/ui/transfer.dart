@@ -1,6 +1,23 @@
+import 'package:eve/bloc/transfer_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Transfer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => TransferBloc(context.read()),
+      child: _Transfer(),
+    );
+  }
+}
+
+class _Transfer extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _TransferContent();
+}
+
+class _TransferContent extends State<_Transfer> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
