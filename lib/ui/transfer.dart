@@ -95,10 +95,28 @@ class _TransferItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Selector<TransferBloc, String>(
-                selector: (_, bloc) => bloc.recipients[_index].bankCode,
+                selector: (_, bloc) => bloc.recipients[_index].name,
+                builder: (_, text, __) => Text(
+                  text,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Selector<TransferBloc, String>(
+                selector: (_, bloc) => bloc.recipients[_index].formattedBankName,
                 builder: (_, text, __) => Text(
                   text,
                   style: Theme.of(context).textTheme.caption,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Selector<TransferBloc, String>(
+                selector: (_, bloc) => bloc.recipients[_index].accountNumber,
+                builder: (_, text, __) => Text(
+                  text,
+                  style: Theme.of(context).textTheme.caption.copyWith(
+                    color: Theme.of(context).textTheme.subtitle1.color,
+                  ),
                 ),
               ),
             ],
