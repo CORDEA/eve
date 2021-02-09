@@ -19,6 +19,12 @@ class _Transfer extends StatefulWidget {
 
 class _TransferContent extends State<_Transfer> {
   @override
+  void initState() {
+    super.initState();
+    context.read<TransferBloc>().fetch();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: 2,
