@@ -27,10 +27,10 @@ class _TransferContent extends State<_Transfer> {
   @override
   Widget build(BuildContext context) {
     var starredLength = context.select<TransferBloc, int>(
-      (value) => value.starredRecipients.length,
+      (value) => value.numberOfStarredRecipients,
     );
     var pastLength = context.select<TransferBloc, int>(
-      (value) => value.pastRecipients.length,
+      (value) => value.numberOfPastRecipients,
     );
     return ListView.builder(
       itemCount: starredLength + pastLength + 2,
@@ -39,12 +39,12 @@ class _TransferContent extends State<_Transfer> {
           return _TransferSectionLabel(text: 'Starred');
         }
         if (index <= starredLength) {
-          return Center();
+          return _TransferItem(index: index - 1);
         }
         if (index == starredLength + 1) {
           return _TransferSectionLabel(text: 'Past recipients');
         }
-        return Center();
+        return _TransferItem(index: index - 2);
       },
     );
   }
@@ -67,6 +67,43 @@ class _TransferSectionLabel extends StatelessWidget {
       child: Text(
         text,
         style: Theme.of(context).textTheme.headline5,
+      ),
+    );
+  }
+}
+
+class _TransferItem extends StatelessWidget {
+  final int _index;
+
+  const _TransferItem({Key key, @required int index})
+      : _index = index,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Selector<TransferBloc, String>(
+                selector: (_, bloc) => bloc.recipients[_index].bankCode,
+                builder: (_, text, __) => Text(
+                  text,
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -9,11 +9,13 @@ class TransferBloc extends ChangeNotifier {
 
   TransferBloc(this._repository);
 
-  Iterable<Recipient> get pastRecipients =>
-      _recipients.where((element) => !element.isMarked);
+  int get numberOfPastRecipients =>
+      _recipients.where((element) => !element.isMarked).length;
 
-  Iterable<Recipient> get starredRecipients =>
-      _recipients.where((element) => element.isMarked);
+  int get numberOfStarredRecipients =>
+      _recipients.where((element) => element.isMarked).length;
+
+  List<Recipient> get recipients => _recipients;
 
   void fetch() {
     _repository.findAll().then((value) {
