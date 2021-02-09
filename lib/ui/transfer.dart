@@ -26,17 +26,25 @@ class _TransferContent extends State<_Transfer> {
 
   @override
   Widget build(BuildContext context) {
+    var starredLength = context.select<TransferBloc, int>(
+      (value) => value.starredRecipients.length,
+    );
+    var pastLength = context.select<TransferBloc, int>(
+      (value) => value.pastRecipients.length,
+    );
     return ListView.builder(
-      itemCount: 2,
+      itemCount: starredLength + pastLength + 2,
       itemBuilder: (context, index) {
-        switch (index) {
-          case 0:
-            return _TransferSectionLabel(text: 'Starred');
-          case 1:
-            return _TransferSectionLabel(text: 'Past recipients');
-          default:
-            return Center();
+        if (index == 0) {
+          return _TransferSectionLabel(text: 'Starred');
         }
+        if (index <= starredLength) {
+          return Center();
+        }
+        if (index == starredLength + 1) {
+          return _TransferSectionLabel(text: 'Past recipients');
+        }
+        return Center();
       },
     );
   }
