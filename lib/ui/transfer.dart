@@ -1,4 +1,5 @@
 import 'package:eve/bloc/transfer_bloc.dart';
+import 'package:eve/ui/new_recipient.dart';
 import 'package:eve/ui/section_label.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -130,9 +131,14 @@ class _TransferNewItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Card(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Icon(Icons.add),
+        child: InkWell(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Icon(Icons.add),
+          ),
+          onTap: () {
+            Navigator.of(context).push(NewRecipient.route());
+          },
         ),
       ),
     );
