@@ -3,7 +3,61 @@ import 'package:flutter/material.dart';
 class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Account')),
+      body: ListView(
+        children: [
+          _AccountSectionLabel(text: 'Emergency'),
+          _AccountItem(
+            title: 'Stop using card',
+            onTap: () {},
+          ),
+          _AccountItem(
+            title: 'Report abuse',
+            onTap: () {},
+          ),
+          _AccountSectionLabel(text: 'Procedure'),
+          _AccountItem(
+            title: 'Confirm/Update your information',
+            onTap: () {},
+          ),
+          _AccountItem(
+            title: 'Update password',
+            onTap: () {},
+          ),
+          _AccountItem(
+            title: 'Confirm/Update notification settings',
+            onTap: () {},
+          ),
+          _AccountItem(
+            title: 'Confirm/Update usage limit',
+            onTap: () {},
+          ),
+          _AccountItem(
+            title: 'Apply for card reissue',
+            onTap: () {},
+          ),
+          _AccountSectionLabel(text: 'About eve'),
+          _AccountItem(
+            title: 'Terms and conditions',
+            onTap: () {},
+          ),
+          _AccountItem(
+            title: 'Privacy policy',
+            onTap: () {},
+          ),
+          _AccountSectionLabel(text: 'About this app'),
+          _AccountItem(
+            title: 'Open source licenses',
+            onTap: () {},
+          ),
+          _AccountItem(
+            title: 'Sign out',
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -26,13 +80,11 @@ class _AccountSectionLabel extends StatelessWidget {
 
 class _AccountItem extends StatelessWidget {
   final String title;
-  final String subtitle;
   final GestureTapCallback onTap;
 
   const _AccountItem({
     Key key,
     this.title,
-    this.subtitle,
     this.onTap,
   }) : super(key: key);
 
@@ -42,10 +94,6 @@ class _AccountItem extends StatelessWidget {
       title: Text(
         title,
         style: Theme.of(context).textTheme.subtitle1,
-      ),
-      subtitle: Text(
-        subtitle,
-        style: Theme.of(context).textTheme.caption,
       ),
       onTap: onTap,
     );
