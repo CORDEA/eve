@@ -85,11 +85,6 @@ class _TransferItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8),
-          ),
-        ),
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -135,11 +130,6 @@ class _TransferNewItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8),
-          ),
-        ),
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Icon(Icons.add),

@@ -69,11 +69,6 @@ class _HomeContent extends State<_Home> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                  ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
                     child: _HomeAccountContent(),
@@ -87,11 +82,6 @@ class _HomeContent extends State<_Home> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                  ),
                   child: _HomeNotifications(),
                 ),
               ),

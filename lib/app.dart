@@ -24,6 +24,13 @@ class App extends StatelessWidget {
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             selectedItemColor: Colors.brown[400],
           ),
+          cardTheme: CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+          )
         ),
         home: Base(),
       ),
