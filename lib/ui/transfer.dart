@@ -1,4 +1,5 @@
 import 'package:eve/bloc/transfer_bloc.dart';
+import 'package:eve/ui/section_label.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -64,10 +65,7 @@ class _TransferSectionLabel extends StatelessWidget {
         right: 24,
         bottom: 16,
       ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.headline5,
-      ),
+      child: SectionLabel(text: text),
     );
   }
 }
@@ -103,7 +101,8 @@ class _TransferItem extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Selector<TransferBloc, String>(
-                selector: (_, bloc) => bloc.recipients[_index].formattedBankName,
+                selector: (_, bloc) =>
+                    bloc.recipients[_index].formattedBankName,
                 builder: (_, text, __) => Text(
                   text,
                   style: Theme.of(context).textTheme.caption,
@@ -115,8 +114,8 @@ class _TransferItem extends StatelessWidget {
                 builder: (_, text, __) => Text(
                   text,
                   style: Theme.of(context).textTheme.caption.copyWith(
-                    color: Theme.of(context).textTheme.subtitle1.color,
-                  ),
+                        color: Theme.of(context).textTheme.subtitle1.color,
+                      ),
                 ),
               ),
             ],

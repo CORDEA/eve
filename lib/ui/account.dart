@@ -1,3 +1,4 @@
+import 'package:eve/ui/section_label.dart';
 import 'package:flutter/material.dart';
 
 class Account extends StatelessWidget {
@@ -72,10 +73,7 @@ class _AccountSectionLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.headline5,
-      ),
+      child: SectionLabel(text: text),
     );
   }
 }
