@@ -30,7 +30,10 @@ class App extends StatelessWidget {
                 Radius.circular(8),
               ),
             ),
-          )
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(),
+          ),
         ),
         home: Base(),
       ),
