@@ -34,7 +34,7 @@ class _TransferContent extends State<_Transfer> {
       (value) => value.numberOfPastRecipients,
     );
     return ListView.builder(
-      itemCount: starredLength + pastLength + 2,
+      itemCount: starredLength + pastLength + 3,
       itemBuilder: (context, index) {
         if (index == 0) {
           return _TransferSectionLabel(text: 'Starred');
@@ -45,7 +45,10 @@ class _TransferContent extends State<_Transfer> {
         if (index == starredLength + 1) {
           return _TransferSectionLabel(text: 'Past recipients');
         }
-        return _TransferItem(index: index - 2);
+        if (index <= starredLength + pastLength + 1) {
+          return _TransferItem(index: index - 2);
+        }
+        return _TransferNewItem();
       },
     );
   }
@@ -120,6 +123,26 @@ class _TransferItem extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _TransferNewItem extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Icon(Icons.add),
         ),
       ),
     );
