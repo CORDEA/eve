@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Account extends StatelessWidget {
+  static Route route() => MaterialPageRoute(builder: (_) => Account());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:eve/bloc/home_bloc.dart';
 import 'package:eve/models/notification.dart' as notification;
+import 'package:eve/ui/account.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +47,9 @@ class _HomeContent extends State<_Home> {
                 child: IconButton(
                   icon: const Icon(Icons.settings),
                   tooltip: 'Account',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(Account.route());
+                  },
                 ),
               ),
             ),
