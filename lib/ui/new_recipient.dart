@@ -22,19 +22,31 @@ class _NewRecipient extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
         children: [
-          _NewRecipientTextField(label: 'Bank code'),
+          _NewRecipientTextField(
+            label: 'Bank code',
+            onChanged: context.read<NewRecipientBloc>().onBankCodeChanged,
+          ),
           const SizedBox(height: 16),
-          _NewRecipientTextField(label: 'Branch code'),
+          _NewRecipientTextField(
+            label: 'Branch code',
+            onChanged: context.read<NewRecipientBloc>().onBranchCodeChanged,
+          ),
           const SizedBox(height: 16),
-          _NewRecipientTextField(label: 'Account number'),
+          _NewRecipientTextField(
+            label: 'Account number',
+            onChanged: context.read<NewRecipientBloc>().onAccountNumberChanged,
+          ),
           const SizedBox(height: 16),
-          _NewRecipientTextField(label: 'Name'),
+          _NewRecipientTextField(
+            label: 'Name',
+            onChanged: context.read<NewRecipientBloc>().onNameChanged,
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.arrow_forward),
         tooltip: 'Next',
-        onPressed: () {},
+        onPressed: context.read<NewRecipientBloc>().submit,
       ),
     );
   }
@@ -42,8 +54,13 @@ class _NewRecipient extends StatelessWidget {
 
 class _NewRecipientTextField extends StatelessWidget {
   final String label;
+  final ValueChanged<String> onChanged;
 
-  const _NewRecipientTextField({Key key, this.label}) : super(key: key);
+  _NewRecipientTextField({
+    Key key,
+    this.label,
+    this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +73,7 @@ class _NewRecipientTextField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: label,
         ),
+        onChanged: onChanged,
       ),
     );
   }
