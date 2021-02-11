@@ -1,8 +1,20 @@
+import 'package:eve/bloc/new_recipient_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewRecipient extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => NewRecipient());
 
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => NewRecipientBloc(),
+      child: _NewRecipient(),
+    );
+  }
+}
+
+class _NewRecipient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
