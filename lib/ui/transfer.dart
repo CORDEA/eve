@@ -33,6 +33,12 @@ class Transfer extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Text('Pay'),
+        icon: Icon(Icons.check),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
