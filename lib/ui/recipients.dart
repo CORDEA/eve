@@ -1,64 +1,64 @@
-import 'package:eve/bloc/transfer_bloc.dart';
+import 'package:eve/bloc/recipients_bloc.dart';
 import 'package:eve/ui/new_recipient.dart';
 import 'package:eve/ui/section_label.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Transfer extends StatelessWidget {
+class Recipients extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => TransferBloc(context.read()),
-      child: _Transfer(),
+      create: (_) => RecipientsBloc(context.read()),
+      child: _Recipients(),
     );
   }
 }
 
-class _Transfer extends StatefulWidget {
+class _Recipients extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TransferContent();
+  State<StatefulWidget> createState() => _RecipientsContent();
 }
 
-class _TransferContent extends State<_Transfer> {
+class _RecipientsContent extends State<_Recipients> {
   @override
   void initState() {
     super.initState();
-    context.read<TransferBloc>().fetch();
+    context.read<RecipientsBloc>().fetch();
   }
 
   @override
   Widget build(BuildContext context) {
-    var starredLength = context.select<TransferBloc, int>(
+    var starredLength = context.select<RecipientsBloc, int>(
       (value) => value.numberOfStarredRecipients,
     );
-    var pastLength = context.select<TransferBloc, int>(
+    var pastLength = context.select<RecipientsBloc, int>(
       (value) => value.numberOfPastRecipients,
     );
     return ListView.builder(
       itemCount: starredLength + pastLength + 3,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return _TransferSectionLabel(text: 'Starred');
+          return _RecipientSectionLabel(text: 'Starred');
         }
         if (index <= starredLength) {
-          return _TransferItem(index: index - 1);
+          return _RecipientItem(index: index - 1);
         }
         if (index == starredLength + 1) {
-          return _TransferSectionLabel(text: 'Past recipients');
+          return _RecipientSectionLabel(text: 'Past recipients');
         }
         if (index <= starredLength + pastLength + 1) {
-          return _TransferItem(index: index - 2);
+          return _RecipientItem(index: index - 2);
         }
-        return _TransferNewItem();
+        return _RecipientNewItem();
       },
     );
   }
 }
 
-class _TransferSectionLabel extends StatelessWidget {
+class _RecipientSectionLabel extends StatelessWidget {
   final String text;
 
-  const _TransferSectionLabel({Key key, this.text}) : super(key: key);
+  const _RecipientSectionLabel({Key key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +74,10 @@ class _TransferSectionLabel extends StatelessWidget {
   }
 }
 
-class _TransferItem extends StatelessWidget {
+class _RecipientItem extends StatelessWidget {
   final int _index;
 
-  const _TransferItem({Key key, @required int index})
+  const _RecipientItem({Key key, @required int index})
       : _index = index,
         super(key: key);
 
@@ -91,7 +91,7 @@ class _TransferItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Selector<TransferBloc, String>(
+              Selector<RecipientsBloc, String>(
                 selector: (_, bloc) => bloc.recipients[_index].name,
                 builder: (_, text, __) => Text(
                   text,
@@ -99,7 +99,7 @@ class _TransferItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              Selector<TransferBloc, String>(
+              Selector<RecipientsBloc, String>(
                 selector: (_, bloc) =>
                     bloc.recipients[_index].formattedBankName,
                 builder: (_, text, __) => Text(
@@ -108,7 +108,7 @@ class _TransferItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 4),
-              Selector<TransferBloc, String>(
+              Selector<RecipientsBloc, String>(
                 selector: (_, bloc) => bloc.recipients[_index].accountNumber,
                 builder: (_, text, __) => Text(
                   text,
@@ -125,7 +125,7 @@ class _TransferItem extends StatelessWidget {
   }
 }
 
-class _TransferNewItem extends StatelessWidget {
+class _RecipientNewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(

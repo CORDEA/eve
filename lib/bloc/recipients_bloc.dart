@@ -2,12 +2,12 @@ import 'package:eve/models/recipient.dart';
 import 'package:eve/repositories/recipient_repository.dart';
 import 'package:flutter/foundation.dart';
 
-class TransferBloc extends ChangeNotifier {
+class RecipientsBloc extends ChangeNotifier {
   final RecipientRepository _repository;
 
   List<Recipient> _recipients = [];
 
-  TransferBloc(this._repository);
+  RecipientsBloc(this._repository);
 
   int get numberOfPastRecipients =>
       _recipients.where((element) => !element.isMarked).length;

@@ -1,7 +1,7 @@
 import 'package:eve/bloc/base_bloc.dart';
 import 'package:eve/ui/details.dart';
 import 'package:eve/ui/home.dart';
-import 'package:eve/ui/transfer.dart';
+import 'package:eve/ui/recipients.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,16 +19,18 @@ class _Base extends StatelessWidget {
   static final List<Widget> _contents = [
     Home(),
     Details(),
-    Transfer(),
+    Recipients(),
   ];
 
   @override
   Widget build(BuildContext context) {
     var bloc = context.watch<BaseBloc>();
     return Scaffold(
-      appBar: bloc.shouldShowAppBar ? AppBar(
-        title: const Text('eve'),
-      ) : null,
+      appBar: bloc.shouldShowAppBar
+          ? AppBar(
+              title: const Text('eve'),
+            )
+          : null,
       body: _contents[bloc.index],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
