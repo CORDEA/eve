@@ -21,10 +21,25 @@ class Transfer extends StatelessWidget {
   }
 }
 
-class _Transfer extends StatelessWidget {
+class _Transfer extends StatefulWidget {
   final Recipient recipient;
 
   const _Transfer({Key key, @required this.recipient}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _TransferContent(recipient);
+}
+
+class _TransferContent extends State<_Transfer> {
+  final Recipient recipient;
+
+  _TransferContent(this.recipient);
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<TransferBloc>().fetch();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,16 +92,22 @@ class _TransferSourceItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '',
-              style: Theme.of(context).textTheme.caption,
+            Selector<TransferBloc, String>(
+              selector: (_, bloc) => bloc.branch,
+              builder: (_, text, __) => Text(
+                text,
+                style: Theme.of(context).textTheme.caption,
+              ),
             ),
             const SizedBox(height: 4),
-            Text(
-              '',
-              style: Theme.of(context).textTheme.caption.copyWith(
-                    color: Theme.of(context).textTheme.subtitle1.color,
-                  ),
+            Selector<TransferBloc, String>(
+              selector: (_, bloc) => bloc.accountNumber,
+              builder: (_, text, __) => Text(
+                text,
+                style: Theme.of(context).textTheme.caption.copyWith(
+                      color: Theme.of(context).textTheme.subtitle1.color,
+                    ),
+              ),
             ),
           ],
         ),

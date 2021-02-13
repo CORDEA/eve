@@ -9,7 +9,11 @@ class TransferBloc extends ChangeNotifier {
 
   TransferBloc(this._repository);
 
-  Account get account => _account;
+  String get branch => _account.branchCode + ' ' + _account.branchName;
+
+  String get ownerName => _account.ownerName;
+
+  String get accountNumber => _account.number;
 
   void fetch() {
     _repository.find().then((value) {
