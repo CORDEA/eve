@@ -1,3 +1,4 @@
+import 'package:eve/models/recipient.dart';
 import 'package:flutter/foundation.dart';
 
 class NewRecipientBloc extends ChangeNotifier {
@@ -5,6 +6,10 @@ class NewRecipientBloc extends ChangeNotifier {
   String _branchCode = '';
   String _accountNumber = '';
   String _name = '';
+
+  Recipient _recipient;
+
+  Recipient get recipient => _recipient;
 
   void onBankCodeChanged(String text) {
     _bankCode = text;
@@ -24,5 +29,15 @@ class NewRecipientBloc extends ChangeNotifier {
 
   void submit() {
     // TODO
+    _recipient = Recipient(
+      _name,
+      _bankCode,
+      '',
+      _branchCode,
+      '',
+      _accountNumber,
+      false,
+    );
+    notifyListeners();
   }
 }

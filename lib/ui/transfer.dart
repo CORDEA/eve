@@ -1,6 +1,17 @@
+import 'package:eve/models/recipient.dart';
 import 'package:flutter/material.dart';
 
 class Transfer extends StatelessWidget {
+  static Route route(Recipient recipient) => MaterialPageRoute(
+        builder: (_) => Transfer(
+          recipient: recipient,
+        ),
+      );
+
+  final Recipient recipient;
+
+  const Transfer({Key key, @required this.recipient}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

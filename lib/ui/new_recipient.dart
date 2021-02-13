@@ -1,4 +1,6 @@
 import 'package:eve/bloc/new_recipient_bloc.dart';
+import 'package:eve/models/recipient.dart';
+import 'package:eve/ui/transfer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +19,14 @@ class NewRecipient extends StatelessWidget {
 class _NewRecipient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var recipient = context.select<NewRecipientBloc, Recipient>(
+      (value) => value.recipient,
+    );
+    Future.microtask(() {
+      if (recipient != null) {
+        Navigator.of(context).push(Transfer.route(recipient));
+      }
+    });
     return Scaffold(
       appBar: AppBar(title: const Text('About the recipient')),
       body: ListView(
