@@ -27,7 +27,3 @@ class RecipientsBloc extends ChangeNotifier {
     });
   }
 }
-
-extension RecipientExt on Recipient {
-  String get formattedBankName => bankName + ' ' + bankBranchName;
-}

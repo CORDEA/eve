@@ -1,4 +1,5 @@
 import 'package:eve/models/recipient.dart';
+import 'package:eve/ui/recipient_ext.dart';
 import 'package:flutter/material.dart';
 
 class Transfer extends StatelessWidget {
@@ -24,7 +25,7 @@ class Transfer extends StatelessWidget {
           const SizedBox(height: 16),
           const Icon(Icons.arrow_downward),
           const SizedBox(height: 16),
-          _TransferDestinationItem(),
+          _TransferDestinationItem(recipient: recipient),
           const SizedBox(height: 44),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -82,6 +83,13 @@ class _TransferSourceItem extends StatelessWidget {
 }
 
 class _TransferDestinationItem extends StatelessWidget {
+  final Recipient recipient;
+
+  const _TransferDestinationItem({
+    Key key,
+    @required this.recipient,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -91,17 +99,17 @@ class _TransferDestinationItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '',
+              recipient.name,
               style: Theme.of(context).textTheme.subtitle1,
             ),
             const SizedBox(height: 12),
             Text(
-              '',
+              recipient.formattedBankName,
               style: Theme.of(context).textTheme.caption,
             ),
             const SizedBox(height: 4),
             Text(
-              '',
+              recipient.accountNumber,
               style: Theme.of(context).textTheme.caption.copyWith(
                     color: Theme.of(context).textTheme.subtitle1.color,
                   ),

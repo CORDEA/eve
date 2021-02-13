@@ -1,5 +1,6 @@
 import 'package:eve/bloc/recipients_bloc.dart';
 import 'package:eve/ui/new_recipient.dart';
+import 'package:eve/ui/recipient_ext.dart';
 import 'package:eve/ui/section_label.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
