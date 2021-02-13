@@ -2,6 +2,7 @@ import 'package:eve/bloc/recipients_bloc.dart';
 import 'package:eve/ui/new_recipient.dart';
 import 'package:eve/ui/recipient_ext.dart';
 import 'package:eve/ui/section_label.dart';
+import 'package:eve/ui/transfer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -87,39 +88,48 @@ class _RecipientItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Card(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Selector<RecipientsBloc, String>(
-                selector: (_, bloc) => bloc.recipients[_index].name,
-                builder: (_, text, __) => Text(
-                  text,
-                  style: Theme.of(context).textTheme.subtitle1,
+        child: InkWell(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Selector<RecipientsBloc, String>(
+                  selector: (_, bloc) => bloc.recipients[_index].name,
+                  builder: (_, text, __) => Text(
+                    text,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              Selector<RecipientsBloc, String>(
-                selector: (_, bloc) =>
-                    bloc.recipients[_index].formattedBankName,
-                builder: (_, text, __) => Text(
-                  text,
-                  style: Theme.of(context).textTheme.caption,
+                const SizedBox(height: 12),
+                Selector<RecipientsBloc, String>(
+                  selector: (_, bloc) =>
+                      bloc.recipients[_index].formattedBankName,
+                  builder: (_, text, __) => Text(
+                    text,
+                    style: Theme.of(context).textTheme.caption,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Selector<RecipientsBloc, String>(
-                selector: (_, bloc) => bloc.recipients[_index].accountNumber,
-                builder: (_, text, __) => Text(
-                  text,
-                  style: Theme.of(context).textTheme.caption.copyWith(
-                        color: Theme.of(context).textTheme.subtitle1.color,
-                      ),
+                const SizedBox(height: 4),
+                Selector<RecipientsBloc, String>(
+                  selector: (_, bloc) => bloc.recipients[_index].accountNumber,
+                  builder: (_, text, __) => Text(
+                    text,
+                    style: Theme.of(context).textTheme.caption.copyWith(
+                          color: Theme.of(context).textTheme.subtitle1.color,
+                        ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+          onTap: () {
+            Navigator.of(context).push(
+              Transfer.route(
+                context.read<RecipientsBloc>().recipients[_index],
+              ),
+            );
+          },
         ),
       ),
     );
